@@ -215,7 +215,7 @@ for ireplic = 1:nreplic
             if elb_imposed=="yes"
                 if min(rtest)<elb_epsi | mprule=="adur" | mprule=="aait"
                     threshold_forces = "no";
-                    addscalc;
+                    addscalc_NPS;
                     yc = ghxfull*yl + ghu*xc;
                     rtest = ar_rff*yc - elb;
                     if ecfs_option == "yes"
@@ -226,7 +226,7 @@ for ireplic = 1:nreplic
             if elb_imposed =="no" 
                 if mprule=="adur" | mprule=="aait"
                     threshold_forces = "no";
-                    addscalc;
+                    addscalc_NPS;
                     yc = ghxfull*yl + ghu*xc;
                     rtest = ar_rff*yc - elb;
                     if ecfs_option == "yes"
@@ -288,7 +288,7 @@ for ireplic = 1:nreplic
             end
             if eradds_needed == 3
                 threshold_forces = "no";
-                addscalc;
+                addscalc_NPS;
             end
             yc = ghxfull*yl + ghu*xc;
             rtest = ar_rff*yc - elb;

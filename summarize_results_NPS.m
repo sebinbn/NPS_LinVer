@@ -406,25 +406,34 @@ if nsimqtrs > 100
     % Loss
     z1 = xgap2_mat(101:nsimqtrs,:);
     z2 = pic4_mat(101:nsimqtrs,:);
-    z3 = rff_mat(101:nsimqtrs,:) - rff_mat(100:(nsimqtrs-1),:);
-    loss = sum(sum(z1.^2+z2.^2))/(nreplic*(nsimqtrs-100));
-    loss1 = sum(sum(z1.^2+z2.^2 + z3.^2))/(nreplic*(nsimqtrs-100));
-    loss_asym = sum(sum((z1.*(z1<0)).^2+ z2.^2 + z3.^2))/(nreplic*(nsimqtrs-100));
-    % if loss_mod == 1
-    %     z3 = rff_mat(101:nsimqtrs,:) - rff_mat(100:(nsimqtrs-1),:);
-    %     loss = sum(sum(z1.^2+z2.^2 + z3.^2))/(nreplic*(nsimqtrs-100));
-    % else
-    %     loss = sum(sum(z1.^2+z2.^2))/(nreplic*(nsimqtrs-100));
-    % end
-    titles = strvcat(titles,'  Loss');
-    values = strvcat(values,string(num2str(loss,'%.2f')));
-    longrun_info.loss = loss;
-    titles = strvcat(titles,'  Loss with FFR');
-    values = strvcat(values,string(num2str(loss1,'%.2f')));
-    longrun_info.loss1 = loss1;
-    titles = strvcat(titles,'  Asymmetric Loss');
-    values = strvcat(values,string(num2str(loss_asym,'%.2f')));
-    longrun_info.loss_asym = loss_asym;
+    z3 = ugap_mat(101:nsimqtrs,:);
+    z4 = rff_mat(101:nsimqtrs,:) - rff_mat(100:(nsimqtrs-1),:);
+    
+    loss(1) = sum(sum(z1.^2+z2.^2))/(nreplic*(nsimqtrs-100));
+    loss(2) = sum(sum(z3.^2+z2.^2))/(nreplic*(nsimqtrs-100));
+    loss(3) = sum(sum(z1.^2+z2.^2 + z4.^2))/(nreplic*(nsimqtrs-100));
+    loss(4) = sum(sum(z3.^2+z2.^2 + z4.^2))/(nreplic*(nsimqtrs-100));
+    loss(5) = sum(sum((z1.*(z1<0)).^2+ z2.^2))/(nreplic*(nsimqtrs-100));
+    loss(6) = sum(sum((z3.*(z3<0)).^2+ z2.^2))/(nreplic*(nsimqtrs-100));
+    loss(7) = sum(sum((z1.*(z1<0)).^2+z2.^2 + z4.^2))/(nreplic*(nsimqtrs-100));
+    loss(8) = sum(sum((z3.*(z3<0)).^2+z2.^2 + z4.^2))/(nreplic*(nsimqtrs-100));
+    
+     loss_descr = [ " Loss"," Loss with ugap"," Loss incl FFR",...
+         "Loss w ugap & FFR"," Asymmetric Loss"," Asymmetric Loss w ugap"...
+        " Asymmetric Loss w FFR"," Asymmetric Loss w ugap & FFR"];
+    for i = 1:8
+    titles = strvcat(titles,loss_descr(i));
+    values = strvcat(values,string(num2str(loss(i),'%.2f')));
+    end
+    
+    longrun_info.loss = loss(1);   
+    longrun_info.lossU = loss(2);
+    longrun_info.lossFFR = loss(3);
+    longrun_info.lossUFFR = loss(4);
+    longrun_info.loss_asym = loss(5);
+    longrun_info.lossU_asym = loss(6);    
+    longrun_info.lossFFR_asym = loss(7);    
+    longrun_info.lossUFFR_asym = loss(8);
 
     % Simulated ELB frequency
     if elb_imposed == "yes"

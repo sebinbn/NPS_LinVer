@@ -13,8 +13,8 @@
 clear all;
 
 % Provide the path to Dynare (eg, addpath c:/dynare/5.0/matlab)
-%addpath c:/dynare/5.2/matlab  % for Sebin's office laptop
-addpath c:/dynare/5.4/matlab
+addpath c:/dynare/5.2/matlab  % for Sebin's office laptop
+%addpath c:/dynare/5.4/matlab
 
 % Supply model settings (mandatory unless otherwise indicated)
 %   expvers -- expectational version of the model
@@ -35,11 +35,11 @@ addpath c:/dynare/5.4/matlab
 %   ecfs_floor -- optional ECFS-induced lower bound on the
 %     expected output gap (default is -15)
 
-all_expvers = ["var","mceall","mcapwp","mcap"];
+%all_expvers = ["var","mceall","mcapwp","mcap"];
 
-for vers = 3
-for aait_mod = [1,9,2,3,0]; %[8,1,9,2,3,0]; %0 - Shortfalls,8 - AAIT, 1 - ACIT,  4 = AAIT4yr, 9 - ATIT, 2 - traditional, 3 - AIT
-expvers = all_expvers(vers);
+for vers = ["mceall","mcapwp","mcap"] %["var","mceall","mcapwp","mcap"];
+for aait_mod = [2,0] %0 - Shortfalls,8 - AAIT, 1 - ACIT,  4 = AAIT4yr, 9 - ATIT, 2 - traditional, 3 - AIT
+expvers = vers;
 if aait_mod == 2
     mprule = "intay";
 elseif aait_mod == 3
@@ -55,7 +55,7 @@ elb = -3;  % required only if elb_imposed = "yes"
 %ecfs_floor = -25;
 
 inertial = 0; %0 - non-inertial rule or 1 - inertial rule 
-loss_mod = 0; %0 - regular loss fn., 1 - loss fn. with FFR, 2 - asymmteric loss fn
+
 
 
 
@@ -111,7 +111,7 @@ loss_mod = 0; %0 - regular loss fn., 1 - loss fn. with FFR, 2 - asymmteric loss 
 %     saved if save_option is invoked (default is stochsims_results)
 
 add_track_names = ["fiscal","rrff"];
-%nreplic = 500;
+%nreplic = 300;
 %nsimqtrs = 300;
 %residuals_file = 'hist_residuals.txt';
 %draw_method = "mvnorm";
@@ -149,7 +149,7 @@ end
 % based on the user-supplied and default parameter settings and
 % process it using DYNARE
 
-make_runmod;
+make_runmod_NPS;
 if fail_flag == "yes"
     return
 end
@@ -182,8 +182,8 @@ stochloop;
 
 % Compute summary statistics and if selected, save results
 
-summarize_results;
-clearvars -except vers all_expvers aait_mod
+summarize_results_NPS;
+clearvars -except vers aait_mod
 
 end
 end
