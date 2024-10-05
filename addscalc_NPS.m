@@ -93,8 +93,8 @@ while vflag == 1
                 materm_mat(counter,:) = (0.075*picx4_pred).*asymtest;                   % for Inertial ACIT
                 %materm_mat(counter,:) =(0.075*pitarg_new).*asymtest;%testing ATIT
             elseif aait_mod == 0
-                materm_mat(counter,:) = (0.15*xgap2_pred).*asymtest;                    %Inertial Shortfalls with Balanced Approach
-                %materm_mat(counter,:) = (0.075*xgap2_pred).*asymtest;                   %Inertial Shortfalls with Taylor
+                %materm_mat(counter,:) = (0.15*xgap2_pred).*asymtest;                    %Inertial Shortfalls with Balanced Approach
+                materm_mat(counter,:) = (0.075*xgap2_pred).*asymtest;                   %Inertial Shortfalls with Taylor
             end
         elseif inertial == 0 
             if aait_mod == 8
@@ -106,7 +106,8 @@ while vflag == 1
             elseif aait_mod == 1
                 materm_mat(counter,:) = (0.5*picx4_pred).*asymtest;                    % for Non-inertial ACIT
             elseif aait_mod == 0
-                materm_mat(counter,:) = (xgap2_pred).*asymtest;                         %Non-inertial Shortfalls with Balanced Approach
+                %materm_mat(counter,:) = (xgap2_pred).*asymtest;                         %Non-inertial Shortfalls with Balanced Approach
+                materm_mat(counter,:) = (0.5*xgap2_pred).*asymtest;                     %Non-inertial Shortfalls with Taylor
             end
         end
         z = asymtest*0;

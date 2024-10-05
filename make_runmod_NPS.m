@@ -63,9 +63,11 @@ if mprule == "infpt"
 end
 if mprule == "ait"
     if inertial == 1
-        a="rule=.85*rff(-1)+.15*rstar+.15*picx4+1.20*pic32-1.20*pitarg+.15*xgap2;";
+        %a="rule=.85*rff(-1)+.15*rstar+.15*picx4+1.20*pic32-1.20*pitarg+.15*xgap2;";  %Balanced Approach
+        a="rule=.85*rff(-1)+.15*rstar+.15*picx4+1.20*pic32-1.20*pitarg+.075*xgap2;"; %Taylor rule
     elseif inertial == 0
-        a="rule= rstar+ picx4+ 8*pic32- 8*pitarg+ xgap2;";
+        %a="rule= rstar+ picx4+ 8*pic32- 8*pitarg+ xgap2;";                  %Balanced Approach
+        a="rule= rstar+ picx4+ 8*pic32- 8*pitarg+ 0.5 * xgap2;";            %Taylor rule
     end
 end
 if mprule == "rw"

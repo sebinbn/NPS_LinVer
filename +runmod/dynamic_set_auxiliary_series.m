@@ -5,13 +5,13 @@ function ds = dynamic_set_auxiliary_series(ds, params)
 % Warning : this file is generated automatically by Dynare
 %           from model file (.mod)
 
-ds.AUX_ENDO_LEAD_4867=ds.pic4(1);
-ds.AUX_ENDO_LEAD_4871=ds.AUX_ENDO_LEAD_4867(1);
-ds.AUX_ENDO_LEAD_4875=ds.AUX_ENDO_LEAD_4871(1);
-ds.AUX_ENDO_LEAD_4879=ds.AUX_ENDO_LEAD_4875(1);
-ds.AUX_ENDO_LEAD_4883=ds.AUX_ENDO_LEAD_4879(1);
-ds.AUX_ENDO_LEAD_4887=ds.AUX_ENDO_LEAD_4883(1);
-ds.AUX_ENDO_LEAD_4044=ds.AUX_ENDO_LEAD_4887(1);
+ds.AUX_ENDO_LEAD_4702=ds.pic4(1);
+ds.AUX_ENDO_LEAD_4706=ds.AUX_ENDO_LEAD_4702(1);
+ds.AUX_ENDO_LEAD_4710=ds.AUX_ENDO_LEAD_4706(1);
+ds.AUX_ENDO_LEAD_4714=ds.AUX_ENDO_LEAD_4710(1);
+ds.AUX_ENDO_LEAD_4718=ds.AUX_ENDO_LEAD_4714(1);
+ds.AUX_ENDO_LEAD_4722=ds.AUX_ENDO_LEAD_4718(1);
+ds.AUX_ENDO_LEAD_4044=ds.AUX_ENDO_LEAD_4722(1);
 ds.AUX_ENDO_LAG_3_1=ds.ebfi_l(-1);
 ds.AUX_ENDO_LAG_3_2=ds.AUX_ENDO_LAG_3_1(-1);
 ds.AUX_ENDO_LAG_198_1=ds.xb_l(-1);
@@ -129,9 +129,6 @@ ds.AUX_ENDO_LAG_141_2=ds.AUX_ENDO_LAG_141_1(-1);
 ds.AUX_ENDO_LAG_141_3=ds.AUX_ENDO_LAG_141_2(-1);
 ds.AUX_ENDO_LAG_141_4=ds.AUX_ENDO_LAG_141_3(-1);
 ds.AUX_ENDO_LAG_94_1=ds.lprdt_l(-1);
-ds.AUX_ENDO_LAG_121_3=ds.AUX_ENDO_LAG_121_2(-1);
-ds.AUX_ENDO_LAG_95_1=ds.lur(-1);
-ds.AUX_ENDO_LAG_96_1=ds.lurnat(-1);
 ds.AUX_ENDO_LAG_153_1=ds.qynidn_l(-1);
 ds.AUX_ENDO_LAG_153_2=ds.AUX_ENDO_LAG_153_1(-1);
 ds.AUX_ENDO_LAG_133_2=ds.AUX_ENDO_LAG_133_1(-1);
