@@ -129,17 +129,29 @@ end
 
 if mprule == "ait" | mprule == "aait"
     a = modtext(varline);
-    a = a + " pic32";
+    if aait_mod == 4
+        a = a + " pic16";
+    else
+        a = a + " pic32";
+    end
     modtext(varline) = a;
     loc = find(modtext=="end;");
-    modtext(loc) = "[name='pic32']";
+    
+    if aait_mod ==4
+        modtext(loc) = "[name='pic16']";
+    else
+        modtext(loc) = "[name='pic32']";
+    end
     loc = loc + 1;
-    a="pic32 = 12.5*pcnia_l - 12.5*pcnia_l(-32);";
+    if aait_mod ==4
+        a="pic16 = 25*pcnia_l - 25*pcnia_l(-16);";
+    else
+        a="pic32 = 12.5*pcnia_l - 12.5*pcnia_l(-32);";
+    end
     modtext(loc) = a;
     loc = loc + 1;
     modtext(loc) = "end;";
 end
-
 
 
 % If the ELB constraint is imposed or a nonlinear policy rule is
