@@ -5,13 +5,13 @@ function ds = dynamic_set_auxiliary_series(ds, params)
 % Warning : this file is generated automatically by Dynare
 %           from model file (.mod)
 
-ds.AUX_ENDO_LEAD_4702=ds.pic4(1);
-ds.AUX_ENDO_LEAD_4706=ds.AUX_ENDO_LEAD_4702(1);
-ds.AUX_ENDO_LEAD_4710=ds.AUX_ENDO_LEAD_4706(1);
-ds.AUX_ENDO_LEAD_4714=ds.AUX_ENDO_LEAD_4710(1);
-ds.AUX_ENDO_LEAD_4718=ds.AUX_ENDO_LEAD_4714(1);
-ds.AUX_ENDO_LEAD_4722=ds.AUX_ENDO_LEAD_4718(1);
-ds.AUX_ENDO_LEAD_4044=ds.AUX_ENDO_LEAD_4722(1);
+ds.AUX_ENDO_LEAD_4707=ds.pic4(1);
+ds.AUX_ENDO_LEAD_4711=ds.AUX_ENDO_LEAD_4707(1);
+ds.AUX_ENDO_LEAD_4715=ds.AUX_ENDO_LEAD_4711(1);
+ds.AUX_ENDO_LEAD_4719=ds.AUX_ENDO_LEAD_4715(1);
+ds.AUX_ENDO_LEAD_4723=ds.AUX_ENDO_LEAD_4719(1);
+ds.AUX_ENDO_LEAD_4727=ds.AUX_ENDO_LEAD_4723(1);
+ds.AUX_ENDO_LEAD_4044=ds.AUX_ENDO_LEAD_4727(1);
 ds.AUX_ENDO_LAG_3_1=ds.ebfi_l(-1);
 ds.AUX_ENDO_LAG_3_2=ds.AUX_ENDO_LAG_3_1(-1);
 ds.AUX_ENDO_LAG_198_1=ds.xb_l(-1);

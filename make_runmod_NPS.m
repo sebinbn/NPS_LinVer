@@ -48,8 +48,8 @@ if mprule == "intay" | mprule == "adur" | mprule == "aait"
             %a="rule=.85*rff(-1)+.15*rstar+.225*picx4-0.075*pitarg + 0.03*xgap2;";                %testing for the expvers that fails with Shortfalls rule (new) - Inertial Taylor
           end
     elseif inertial == 0  
-        %a="rule= rstar+1.5*picx4-0.5*pitarg+ xgap2;";                           %AAIT, ACIT (new) -Non-Inertial Balanced Approach
-        a="rule= rstar+1.5*picx4-0.5*pitarg+ 0.5*xgap2;";                           %AAIT, ACIT (new) -Non-Inertial Taylor
+        a="rule= rstar+1.5*picx4-0.5*pitarg+ xgap2;";                           %AAIT, ACIT (new) -Non-Inertial Balanced Approach
+        %a="rule= rstar+1.5*picx4-0.5*pitarg+ 0.5*xgap2;";                           %AAIT, ACIT (new) -Non-Inertial Taylor
         if aait_mod == 0
             a="rule=rstar+1.5*picx4-0.5*pitarg;";                                   %Shortfalls rule (new) - Non-Inertial Balanced Approach & Taylor
         end

@@ -13,8 +13,8 @@
 clear all;
 
 % Provide the path to Dynare (eg, addpath c:/dynare/5.0/matlab)
-%addpath c:/dynare/5.2/matlab  % for Sebin's office laptop
-addpath c:/dynare/5.4/matlab
+addpath c:/dynare/5.2/matlab  % for Sebin's office laptop
+%addpath c:/dynare/5.4/matlab
 
 % Supply model settings (mandatory unless otherwise indicated)
 %   expvers -- expectational version of the model
@@ -38,7 +38,7 @@ addpath c:/dynare/5.4/matlab
 %all_expvers = ["var","mceall","mcapwp","mcap"];
 
 for vers = ["mcapwp"] %["var","mceall","mcapwp","mcap"];
-for aait_mod = [8,1,9,3] %0 - Shortfalls,8 - AAIT, 1 - ACIT,  4 = AAIT4yr, 9 - ATIT, 2 - traditional, 3 - AIT
+for aait_mod = [4] %0 - Shortfalls,8 - AAIT, 1 - ACIT,  4 = AAIT4yr, 9 - ATIT, 2 - traditional, 3 - AIT
 expvers = vers;
 if aait_mod == 2
     mprule = "intay";
@@ -54,7 +54,7 @@ elb = -3;  % required only if elb_imposed = "yes"
 %ecfs_option = "no";
 %ecfs_floor = -25;
 
-inertial = 0; %0 - non-inertial rule or 1 - inertial rule 
+inertial = 1; %0 - non-inertial rule or 1 - inertial rule 
 
 
 
