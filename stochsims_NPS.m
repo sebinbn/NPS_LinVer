@@ -36,7 +36,6 @@ addpath c:/dynare/5.2/matlab  % for Sebin's office laptop
 %   ecfs_floor -- optional ECFS-induced lower bound on the
 %     expected output gap (default is -15)
 
-%all_expvers = ["var","mceall","mcapwp","mcap"];
 
 for vers = ["mcapwp"] %["var","mceall","mcapwp","mcap"];
 for rulevers = "BA" %["T","BA"]
