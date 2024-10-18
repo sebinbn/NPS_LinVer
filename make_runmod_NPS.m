@@ -41,20 +41,26 @@ if mprule == "tay"
 end
 if mprule == "intay" | mprule == "adur" | mprule == "aait"
       if inertial == 1
-          a="rule=.85*rff(-1)+.15*rstar+.225*picx4-0.075*pitarg +.15*xgap2;";      %Trad,AAIT ACIT (new) - Inertial Balanced Approach
-          %a="rule=.85*rff(-1)+.15*rstar+.225*picx4-0.075*pitarg+.075*xgap2;";      %Trad,AAIT ACIT (new) - Inertial Taylor 
+          if rulevers == 'BA'
+              a="rule=.85*rff(-1)+.15*rstar+.225*picx4-0.075*pitarg +.15*xgap2;";      %Trad,AAIT ACIT (new) - Inertial Balanced Approach
+          else 
+              a="rule=.85*rff(-1)+.15*rstar+.225*picx4-0.075*pitarg+.075*xgap2;";      %Trad,AAIT ACIT (new) - Inertial Taylor 
+          end 
           if aait_mod == 0
             a="rule=.85*rff(-1)+.15*rstar+.225*picx4-0.075*pitarg ;";                %Shortfalls rule (new) - Inertial Balanced Approach & Taylor
-            %a="rule=.85*rff(-1)+.15*rstar+.225*picx4-0.075*pitarg + 0.03*xgap2;";                %testing for the expvers that fails with Shortfalls rule (new) - Inertial Taylor
-          end
+           end
     elseif inertial == 0  
-        a="rule= rstar+1.5*picx4-0.5*pitarg+ xgap2;";                           %AAIT, ACIT (new) -Non-Inertial Balanced Approach
-        %a="rule= rstar+1.5*picx4-0.5*pitarg+ 0.5*xgap2;";                           %AAIT, ACIT (new) -Non-Inertial Taylor
+        if rulevers == 'BA'
+            a="rule= rstar+1.5*picx4-0.5*pitarg+ xgap2;";                           %AAIT, ACIT (new) -Non-Inertial Balanced Approach
+        else 
+            a="rule= rstar+1.5*picx4-0.5*pitarg+ 0.5*xgap2;";                           %AAIT, ACIT (new) -Non-Inertial Taylor
+        end
         if aait_mod == 0
             a="rule=rstar+1.5*picx4-0.5*pitarg;";                                   %Shortfalls rule (new) - Non-Inertial Balanced Approach & Taylor
         end
      end
 end
+
 if mprule == "fpt"
     a="rule=rstar+1.5*picx4-0.5*pitarg+1.0*xgap2+1.0*pcnia_l;";
 end
@@ -63,13 +69,20 @@ if mprule == "infpt"
 end
 if mprule == "ait"
     if inertial == 1
-        %a="rule=.85*rff(-1)+.15*rstar+.15*picx4+1.20*pic32-1.20*pitarg+.15*xgap2;";  %Balanced Approach
-        a="rule=.85*rff(-1)+.15*rstar+.15*picx4+1.20*pic32-1.20*pitarg+.075*xgap2;"; %Taylor rule
+        if rulevers == 'BA'
+            a="rule=.85*rff(-1)+.15*rstar+.15*picx4+1.20*pic32-1.20*pitarg+.15*xgap2;";  %Balanced Approach
+        else 
+            a="rule=.85*rff(-1)+.15*rstar+.15*picx4+1.20*pic32-1.20*pitarg+.075*xgap2;"; %Taylor rule
+        end
     elseif inertial == 0
-        %a="rule= rstar+ picx4+ 8*pic32- 8*pitarg+ xgap2;";                  %Balanced Approach
-        a="rule= rstar+ picx4+ 8*pic32- 8*pitarg+ 0.5 * xgap2;";            %Taylor rule
+        if rulevers == 'BA'
+            a="rule= rstar+ picx4+ 8*pic32- 8*pitarg+ xgap2;";                  %Balanced Approach
+        else 
+            a="rule= rstar+ picx4+ 8*pic32- 8*pitarg+ 0.5 * xgap2;";            %Taylor rule
+        end
     end
 end
+
 if mprule == "rw"
     a="rule=rstar+1.5*picx4-0.075*pitarg+1.0*xgap2+.25*rwterm(-1);";
 end

@@ -17,6 +17,7 @@ addpath c:/dynare/5.2/matlab  % for Sebin's office laptop
 %addpath c:/dynare/5.4/matlab
 
 % Supply model settings (mandatory unless otherwise indicated)
+%   rulevers -- Taylor 'T' or Balanced Approach  'BA' Rules
 %   expvers -- expectational version of the model
 %   mprule -- the federal funds rate rule
 %   elb_imposed -- "yes" or "no"
@@ -38,7 +39,11 @@ addpath c:/dynare/5.2/matlab  % for Sebin's office laptop
 %all_expvers = ["var","mceall","mcapwp","mcap"];
 
 for vers = ["mcapwp"] %["var","mceall","mcapwp","mcap"];
-for aait_mod = [4] %0 - Shortfalls,8 - AAIT, 1 - ACIT,  4 = AAIT4yr, 9 - ATIT, 2 - traditional, 3 - AIT
+for rulevers = "BA" %["T","BA"]
+for aait_mod = [2] %0 - Shortfalls,8 - AAIT, 1 - ACIT,  4 = AAIT4yr, 9 - ATIT, 2 - traditional, 3 - AIT
+ 
+    inertial = 1; %0 - non-inertial rule or 1 - inertial rule 
+
 expvers = vers;
 if aait_mod == 2
     mprule = "intay";
@@ -53,9 +58,6 @@ elb = -3;  % required only if elb_imposed = "yes"
 %ctp_option = 2;
 %ecfs_option = "no";
 %ecfs_floor = -25;
-
-inertial = 1; %0 - non-inertial rule or 1 - inertial rule 
-
 
 
 
@@ -183,8 +185,8 @@ stochloop;
 % Compute summary statistics and if selected, save results
 
 summarize_results_NPS;
-clearvars -except vers aait_mod
+clearvars -except vers rulevers aait_mod
 
 end
 end
-
+end
