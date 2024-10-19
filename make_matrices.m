@@ -111,7 +111,6 @@ end
 if mprule == "aait"
     pic32_loc = inv_order_var(endo_names=="pic32");
     picx4_loc = inv_order_var(endo_names=="picx4");
-    pic16_loc = inv_order_var(endo_names=="pic16");
 end
 if pithresh_imposed == "yes"
     picond_loc = inv_order_var(endo_names=="picond");
@@ -138,8 +137,6 @@ if mprule == "aait"
     ar_pic32(1,pic32_loc) = 1;
     ar_picx4 = zeros(predqtrs,nyv);
     ar_picx4(1,picx4_loc) = 1;
-    ar_pic16 = zeros(predqtrs,nyv); 
-    ar_pic16(1,pic16_loc) = 1; 
 end
 if pithresh_imposed == "yes"
     ar_picond = zeros(predqtrs,nyv);
@@ -159,12 +156,8 @@ for i = 2:predqtrs
     end
     if mprule == "aait"
         ar_picx4(i,:) = aamat(picx4_loc,:);
-        if aait_mod == 4
-            ar_pic16(i,:) = aamat(pic16_loc,:);
-        elseif aait_mod == 8
-            ar_pic32(i,:) = aamat(pic32_loc,:);
-        end
-    end
+        ar_pic32(i,:) = aamat(pic32_loc,:);
+     end
     if pithresh_imposed == "yes"
         ar_picond(i,:) = aamat(picond_loc,:);
     end

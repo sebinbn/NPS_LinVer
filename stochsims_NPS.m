@@ -44,8 +44,7 @@ for mprule = ["intay","short","aait","acit","atit","ait"]
     %for aait_mod = [2] %0 - Shortfalls,8 - AAIT, 1 - ACIT,  4 = AAIT4yr, 9 - ATIT, 2 - traditional, 3 - AIT
  
     
-    mprule = "aait";
-end
+    
 elb_imposed = "yes";
 elb = -3;  % required only if elb_imposed = "yes"
 %tax_gamma = .00075;

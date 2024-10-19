@@ -213,7 +213,7 @@ while vflag == 1
     % Check for nonconvergence of asymmetric components if the ADUR
     % rule or AAIT rule is used
     asymterm_conv = 1;
-    if mprule == "aait" | mprule == "adur"
+    if ismember(mprule,["adur","aait", "acit","atit", "short"])
         madiff_asymterm = max(abs(asymterm-asymterm_last));
         if madiff_asymterm > asym_epsi
             asymterm_conv = 0;
