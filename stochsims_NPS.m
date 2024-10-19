@@ -41,9 +41,9 @@ atit_tgts = [2.2, 2.25,2.5,3]; %asymmetric target for ATIT rule
 acit_coefs = [0.75,1.5]; %asymmetric coefficient for ACIT
   %["intay","short","aait","acit","atit","ait"]
 for expvers = "mcapwp" %["var","mceall","mcapwp","mcap"];
-for rulevers = ["T","BA"]
+for rulevers = ["BA"]
 for rep = 1:6
-    if rep > 5
+    if rep > 4
         mprule = "acit";
         acit_coef = acit_coefs(rep-4);
     else
