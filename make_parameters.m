@@ -36,15 +36,9 @@ if exist('mprule') == 0
     return
 else
     rulelist = ["tay","intay","fpt","infpt","ait","rw","kr"];
-    rulelist = [rulelist,"adur","aait"];
-    foundit = 0;
-    for i = 1:size(rulelist,2)
-        a = rulelist(i);
-        if mprule == rulelist(i)
-            foundit = 1;
-        end
-    end
-    if foundit == 0
+    rulelist = [rulelist,"adur","aait","short","acit","atit"];
+    
+    if ~ismember(mprule,rulelist)
         disp("error: invalid monetary policy rule selected");
         fail_flag = "yes";
         return
