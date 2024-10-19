@@ -108,9 +108,11 @@ end
 if mprule == "adur" | uthresh_imposed == "yes"
     ucond_loc = inv_order_var(endo_names == "ucond");
 end
-if mprule == "aait"
-    pic32_loc = inv_order_var(endo_names=="pic32");
+if ismember(mprule, ["aait", "acit","atit"])
     picx4_loc = inv_order_var(endo_names=="picx4");
+    if mprule == "aait"
+        pic32_loc = inv_order_var(endo_names=="pic32");
+    end
 end
 if pithresh_imposed == "yes"
     picond_loc = inv_order_var(endo_names=="picond");
@@ -132,11 +134,14 @@ if mprule == "adur" | uthresh_imposed == "yes"
     ar_ucond = zeros(predqtrs,nyv);
     ar_ucond(1,ucond_loc) = 1;
 end
-if mprule == "aait"
-    ar_pic32 = zeros(predqtrs,nyv);
-    ar_pic32(1,pic32_loc) = 1;
+if ismember(mprule, ["aait", "acit","atit"])
     ar_picx4 = zeros(predqtrs,nyv);
     ar_picx4(1,picx4_loc) = 1;
+    if mprule == "aait"
+        ar_pic32 = zeros(predqtrs,nyv);
+        ar_pic32(1,pic32_loc) = 1;
+    end
+    
 end
 if pithresh_imposed == "yes"
     ar_picond = zeros(predqtrs,nyv);
@@ -154,9 +159,11 @@ for i = 2:predqtrs
     if mprule == "adur" | uthresh_imposed == "yes"
         ar_ucond(i,:) = aamat(ucond_loc,:);
     end
-    if mprule == "aait"
+    if ismember(mprule, ["aait", "acit","atit"])
         ar_picx4(i,:) = aamat(picx4_loc,:);
-        ar_pic32(i,:) = aamat(pic32_loc,:);
+        if mprule == "aait"
+            ar_pic32(i,:) = aamat(pic32_loc,:);
+        end
      end
     if pithresh_imposed == "yes"
         ar_picond(i,:) = aamat(picond_loc,:);

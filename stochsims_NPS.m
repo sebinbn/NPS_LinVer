@@ -37,14 +37,13 @@ addpath c:/dynare/5.2/matlab  % for Sebin's office laptop
 %     expected output gap (default is -15)
 
 inertial = 1; %0 - non-inertial rule or 1 - inertial rule 
+atit_tgt = 4; %asymmetric target
 
 for expvers = "mcapwp" %["var","mceall","mcapwp","mcap"];
 for rulevers = "BA" %["T","BA"]
-for mprule = ["intay","short","aait","acit","atit","ait"]
-    %for aait_mod = [2] %0 - Shortfalls,8 - AAIT, 1 - ACIT,  4 = AAIT4yr, 9 - ATIT, 2 - traditional, 3 - AIT
- 
-    
-    
+for mprule = "atit" %["intay","short","aait","acit","atit","ait"]
+for atit_tgt = 4 %asymmetric target
+
 elb_imposed = "yes";
 elb = -3;  % required only if elb_imposed = "yes"
 %tax_gamma = .00075;
@@ -114,21 +113,7 @@ add_track_names = ["fiscal","rrff"];
 %alt_range = ["1983Q1","2019Q4"];
 %rescale_wpshocks = "no";
 save_option = "limited";
-if mprule == "aait"
-    if aait_mod == 0
-        save_name = 'saved_results/' + expvers + "_shortfalls_results";
-    elseif aait_mod == 1
-        save_name = 'saved_results/' + expvers + "_acit_results";
-    elseif aait_mod == 8
-        save_name = 'saved_results/' + expvers + "_aait8_results";
-    elseif aait_mod == 9
-        save_name = 'saved_results/' + expvers + "_atit_results";
-    end
-else
-    save_name = 'saved_results/' + expvers + '_' + mprule + "_results";
-end
-
-
+save_name = 'saved_results/' + expvers + '_' + rulevers + '_' + mprule + "_results";
 
 % Verify the validity of user-selected settings and define various
 % parameters used in stochastic simulations
@@ -180,6 +165,7 @@ stochloop;
 summarize_results_NPS;
 clearvars -except expvers rulevers mprule aait_mod
 
+end
 end
 end
 end

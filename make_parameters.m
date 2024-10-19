@@ -108,7 +108,7 @@ end
 % any user-defined value for asymqtrs is valid; if undefined, set
 % asymqtrs equal to its default value 
 
-if mprule == "adur" | mprule == "aait"
+if ismember(mprule,["adur","aait", "acit","atit", "short"])
     if exist('asymqtrs') == 0 
         if expvers == "var"
             asymqtrs = 1;
@@ -150,7 +150,7 @@ end
 if elb_imposed == "yes"
     predqtrs = elbqtrs;
 else
-    if mprule == "adur" | mprule == "aait"
+    if ismember(mprule,["adur","aait", "acit","atit", "short"])
         predqtrs = asymqtrs;
     else
         predqtrs = 0;

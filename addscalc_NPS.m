@@ -58,15 +58,17 @@ while vflag == 1
     % If the AAIT rule is used, compute its asymmetric component
     % using a moving-average smoother to speed convergence
     if ismember(mprule, ["aait", "acit","atit", "short"]) & madiff_asymterm > asym_epsi
-        picx4_pred = ar_picx4*yc;
-        if mprule == "aait"
-            pic32_pred = ar_pic32*yc;
-            asymtest = .5+.5*tanh(-25*(pic32_pred+.1));
-        elseif ismember(mprule, ["acit","atit"])
-            asymtest = .5+.5*tanh(-25*(picx4_pred+.1));
-        elseif mprule == "short"
+        if mprule == "short"
             xgap2_pred = ar_xgap2*yc; %necessary only for Shortfalls rule
             asymtest = .5+.5*tanh(-25*(xgap2_pred+.1));
+        else    
+            picx4_pred = ar_picx4*yc;
+            if mprule == "aait"
+                pic32_pred = ar_pic32*yc;
+                asymtest = .5+.5*tanh(-25*(pic32_pred+.1));
+            elseif ismember(mprule, ["acit","atit"])
+                asymtest = .5+.5*tanh(-25*(picx4_pred+.1));
+            end
         end
         
         if asymqtrs<predqtrs
@@ -82,7 +84,7 @@ while vflag == 1
             if mprule == "aait"
                 materm_mat(counter,:) = (1.2*pic32_pred - 0.075*picx4_pred).*asymtest;                   % for default AAIT
             elseif mprule == "atit"
-                materm_mat(counter,:) = (- 0.075 * 2 ).*asymtest;                                         %2 is the new pitarg
+                materm_mat(counter,:) = (- 0.075 * (atit_tgt -2) ).*asymtest;                                         %2 is the new pitarg
             elseif mprule == "acit"
                 materm_mat(counter,:) = (0.075*picx4_pred).*asymtest;                   % for Inertial ACIT
             elseif mprule == "short"
@@ -96,7 +98,7 @@ while vflag == 1
             if mprule == "aait"
                 materm_mat(counter,:) = (8*pic32_pred - 0.5*picx4_pred).*asymtest;           % for Non-inertial AAIT
             elseif mprule == "atit"
-                materm_mat(counter,:) = (- 0.5 * 2).*asymtest;                              %2 is the new pitarg
+                materm_mat(counter,:) = (- 0.5 * (atit_tgt -2)).*asymtest;                              %2 is the new pitarg
             elseif mprule == "acit"
                 materm_mat(counter,:) = (0.5*picx4_pred).*asymtest;                    % for Non-inertial ACIT
             elseif mprule == "short"

@@ -150,7 +150,7 @@ for ireplic = 1:nreplic
         % the unconstrained policy rule when the ELB is not
         % imposed, set all the lagged eradd terms to zero 
         
-        if elb_imposed=="yes" | mprule=="adur" | mprule=="aait"
+        if elb_imposed=="yes" | ismember(mprule, ["adur","aait", "acit","atit", "short"])
             yl(eradd_locs,1) = 0;
         end
                 
@@ -185,7 +185,7 @@ for ireplic = 1:nreplic
         % constraints. Note -- thresholds and ECFS are only allowed
         % if the ELB constraint is imposed.
          
-        if elb_imposed=="yes" | mprule=="aait" | mprule=="adur"
+        if elb_imposed=="yes" | ismember(mprule, ["adur","aait", "acit","atit", "short"])
             rtest = ar_rff*yc - elb;
         end
         if uthresh_imposed=="yes" | pithresh_imposed=="yes"
@@ -213,7 +213,7 @@ for ireplic = 1:nreplic
         
         if uthresh_imposed ~= "yes" & pithresh_imposed ~= "yes"
             if elb_imposed=="yes"
-                if min(rtest)<elb_epsi | mprule=="adur" | mprule=="aait"
+                if min(rtest)<elb_epsi | ismember(mprule, ["adur","aait", "acit","atit", "short"])
                     threshold_forces = "no";
                     addscalc_NPS;
                     yc = ghxfull*yl + ghu*xc;
@@ -224,7 +224,7 @@ for ireplic = 1:nreplic
                 end
             end
             if elb_imposed =="no" 
-                if mprule=="adur" | mprule=="aait"
+                if ismember(mprule, ["adur","aait", "acit","atit", "short"])
                     threshold_forces = "no";
                     addscalc_NPS;
                     yc = ghxfull*yl + ghu*xc;
@@ -269,7 +269,7 @@ for ireplic = 1:nreplic
                         eradds_needed = 2;
                     end
                 else
-                    if mprule == "adur" | mprule == "aait"
+                    if ismember(mprule, ["adur","aait", "acit","atit", "short"])
                         eradds_needed = 3;
                     end
                 end
