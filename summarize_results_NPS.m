@@ -98,10 +98,10 @@ values = ' ';
 titles = strvcat(titles,'  Expectational version   ');
 values = strvcat(values,expvers);
 titles = strvcat(titles,'  Monetary policy rule   ');
-values = strvcat(values,mprule);
+values = strvcat(values, rulevers + '_' + mprule);
 
 model_info.expvers = expvers;
-model_info.mprule = mprule;
+model_info.mprule = rulevers + '_' + mprule;
 
 if mprule == "adur" | mprule == "aait"
     titles = strvcat(titles,'    Length of nonlinear rule constraint'); 

@@ -36,13 +36,22 @@ addpath c:/dynare/5.2/matlab  % for Sebin's office laptop
 %   ecfs_floor -- optional ECFS-induced lower bound on the
 %     expected output gap (default is -15)
 
-inertial = 1; %0 - non-inertial rule or 1 - inertial rule 
-atit_tgt = 4; %asymmetric target
-
+inertial = 0; %0 - non-inertial rule or 1 - inertial rule 
+atit_tgts = [2.2, 2.25,2.5,3]; %asymmetric target for ATIT rule
+acit_coefs = [0.75,1.5]; %asymmetric coefficient for ACIT
+  %["intay","short","aait","acit","atit","ait"]
 for expvers = "mcapwp" %["var","mceall","mcapwp","mcap"];
-for rulevers = "BA" %["T","BA"]
-for mprule = "atit" %["intay","short","aait","acit","atit","ait"]
-for atit_tgt = 4 %asymmetric target
+for rulevers = ["T","BA"]
+for rep = 1:6
+    if rep > 5
+        mprule = "acit";
+        acit_coef = acit_coefs(rep-4);
+    else
+        mprule = "atit";
+        atit_tgt = atit_tgts(rep);
+    end
+       
+ 
 
 elb_imposed = "yes";
 elb = -3;  % required only if elb_imposed = "yes"
@@ -113,8 +122,13 @@ add_track_names = ["fiscal","rrff"];
 %alt_range = ["1983Q1","2019Q4"];
 %rescale_wpshocks = "no";
 save_option = "limited";
-save_name = 'saved_results/' + expvers + '_' + rulevers + '_' + mprule + "_results";
-
+save_name = 'saved_results/' + expvers + '_' + rulevers + '_' + mprule;
+if mprule == "atit"
+    save_name = save_name + atit_tgt;
+elseif mprule == "acit"
+    save_name = save_name + acit_coef;
+end
+save_name = save_name + '_results';
 % Verify the validity of user-selected settings and define various
 % parameters used in stochastic simulations
 
@@ -163,9 +177,9 @@ stochloop;
 % Compute summary statistics and if selected, save results
 
 summarize_results_NPS;
-clearvars -except expvers rulevers mprule aait_mod
+clearvars -except inertial expvers rulevers mprule atit_tgts acit_coefs
 
 end
 end
 end
-end
+
