@@ -19,10 +19,10 @@ fshk = 0;
 fshkqtrs = min(predqtrs,8);
 fshkcoef = 1;
 ind_nonelb_adds = 0;
-if ecfs_option == "yes" | mprule == "adur" | mprule == "aait"
+if ecfs_option == "yes" | ismember(mprule,["adur","aait", "acit","atit", "short"])
     ind_nonelb_adds = 1;
 end
-if mprule == "aait"
+if ismember(mprule,["aait", "acit","atit", "short"])
     materm_mat = zeros(addcalc_itmax2,predqtrs);
 end
 decay = 1;
@@ -57,19 +57,14 @@ while vflag == 1
     
     % If the AAIT rule is used, compute its asymmetric component
     % using a moving-average smoother to speed convergence
-    if mprule == "aait" & madiff_asymterm > asym_epsi
+    if ismember(mprule, ["aait", "acit","atit", "short"]) & madiff_asymterm > asym_epsi
         picx4_pred = ar_picx4*yc;
-        if aait_mod == 8
+        if mprule == "aait"
             pic32_pred = ar_pic32*yc;
             asymtest = .5+.5*tanh(-25*(pic32_pred+.1));
-        elseif aait_mod == 9
+        elseif ismember(mprule, ["acit","atit"])
             asymtest = .5+.5*tanh(-25*(picx4_pred+.1));
-        elseif aait_mod == 4
-            pic16_pred = ar_pic16*yc;
-            asymtest = .5+.5*tanh(-25*(pic16_pred+.1));
-        elseif aait_mod == 1
-            asymtest = .5+.5*tanh(-25*(picx4_pred+.1));
-        elseif aait_mod == 0
+        elseif mprule == "short"
             xgap2_pred = ar_xgap2*yc; %necessary only for Shortfalls rule
             asymtest = .5+.5*tanh(-25*(xgap2_pred+.1));
         end
@@ -82,16 +77,15 @@ while vflag == 1
         else
             asymterm_last = asymterm;
         end
+        
        if inertial == 1 
-            if aait_mod == 8
+            if mprule == "aait"
                 materm_mat(counter,:) = (1.2*pic32_pred - 0.075*picx4_pred).*asymtest;                   % for default AAIT
-            elseif aait_mod == 9
+            elseif mprule == "atit"
                 materm_mat(counter,:) = (- 0.075 * 2 ).*asymtest;                                         %2 is the new pitarg
-            elseif aait_mod == 4
-                materm_mat(counter,:) = (0.6*pic16_pred - 0.075*picx4_pred).*asymtest;                   % for 4yr avg AAIT
-            elseif aait_mod == 1
+            elseif mprule == "acit"
                 materm_mat(counter,:) = (0.075*picx4_pred).*asymtest;                   % for Inertial ACIT
-            elseif aait_mod == 0
+            elseif mprule == "short"
                 if rulevers == 'BA'
                     materm_mat(counter,:) = (0.15*xgap2_pred).*asymtest;                    %Inertial Shortfalls with Balanced Approach
                 else
@@ -99,15 +93,13 @@ while vflag == 1
                 end
             end
         elseif inertial == 0 
-            if aait_mod == 8
+            if mprule == "aait"
                 materm_mat(counter,:) = (8*pic32_pred - 0.5*picx4_pred).*asymtest;           % for Non-inertial AAIT
-            elseif aait_mod == 9
+            elseif mprule == "atit"
                 materm_mat(counter,:) = (- 0.5 * 2).*asymtest;                              %2 is the new pitarg
-            elseif aait_mod == 4
-                materm_mat(counter,:) = (4*pic16_pred - 0.5*picx4_pred).*asymtest;           % for Non-inertial 4yr AAIT
-            elseif aait_mod == 1
+            elseif mprule == "acit"
                 materm_mat(counter,:) = (0.5*picx4_pred).*asymtest;                    % for Non-inertial ACIT
-            elseif aait_mod == 0
+            elseif mprule == "short"
                 if rulevers == 'BA'
                     materm_mat(counter,:) = (xgap2_pred).*asymtest;                         %Non-inertial Shortfalls with Balanced Approach
                 else

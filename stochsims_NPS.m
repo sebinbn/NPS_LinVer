@@ -36,19 +36,14 @@ addpath c:/dynare/5.2/matlab  % for Sebin's office laptop
 %   ecfs_floor -- optional ECFS-induced lower bound on the
 %     expected output gap (default is -15)
 
+inertial = 1; %0 - non-inertial rule or 1 - inertial rule 
 
-for vers = ["mcapwp"] %["var","mceall","mcapwp","mcap"];
+for expvers = "mcapwp" %["var","mceall","mcapwp","mcap"];
 for rulevers = "BA" %["T","BA"]
-for aait_mod = [2] %0 - Shortfalls,8 - AAIT, 1 - ACIT,  4 = AAIT4yr, 9 - ATIT, 2 - traditional, 3 - AIT
+for mprule = ["intay","short","aait","acit","atit","ait"]
+    %for aait_mod = [2] %0 - Shortfalls,8 - AAIT, 1 - ACIT,  4 = AAIT4yr, 9 - ATIT, 2 - traditional, 3 - AIT
  
-    inertial = 1; %0 - non-inertial rule or 1 - inertial rule 
-
-expvers = vers;
-if aait_mod == 2
-    mprule = "intay";
-elseif aait_mod == 3
-    mprule = "ait";
-else
+    
     mprule = "aait";
 end
 elb_imposed = "yes";
@@ -184,7 +179,7 @@ stochloop;
 % Compute summary statistics and if selected, save results
 
 summarize_results_NPS;
-clearvars -except vers rulevers aait_mod
+clearvars -except expvers rulevers mprule aait_mod
 
 end
 end

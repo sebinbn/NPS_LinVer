@@ -39,26 +39,29 @@ ruleline = find(modtext == "[name='rule']") + 1;
 if mprule == "tay"
     a="rule=rstar+1.5*picx4-0.5*pitarg+1.0*xgap2;"; 
 end
-if mprule == "intay" | mprule == "adur" | mprule == "aait"
+
+if ismember(mprule, ["intay", "adur","aait", "acit","atit"])
       if inertial == 1
           if rulevers == 'BA'
               a="rule=.85*rff(-1)+.15*rstar+.225*picx4-0.075*pitarg +.15*xgap2;";      %Trad,AAIT ACIT (new) - Inertial Balanced Approach
           else 
               a="rule=.85*rff(-1)+.15*rstar+.225*picx4-0.075*pitarg+.075*xgap2;";      %Trad,AAIT ACIT (new) - Inertial Taylor 
           end 
-          if aait_mod == 0
-            a="rule=.85*rff(-1)+.15*rstar+.225*picx4-0.075*pitarg ;";                %Shortfalls rule (new) - Inertial Balanced Approach & Taylor
-           end
-    elseif inertial == 0  
-        if rulevers == 'BA'
-            a="rule= rstar+1.5*picx4-0.5*pitarg+ xgap2;";                           %AAIT, ACIT (new) -Non-Inertial Balanced Approach
-        else 
-            a="rule= rstar+1.5*picx4-0.5*pitarg+ 0.5*xgap2;";                           %AAIT, ACIT (new) -Non-Inertial Taylor
-        end
-        if aait_mod == 0
-            a="rule=rstar+1.5*picx4-0.5*pitarg;";                                   %Shortfalls rule (new) - Non-Inertial Balanced Approach & Taylor
-        end
-     end
+      elseif inertial == 0  
+          if rulevers == 'BA'
+              a="rule= rstar+1.5*picx4-0.5*pitarg+ xgap2;";                           %AAIT, ACIT (new) -Non-Inertial Balanced Approach
+          else
+              a="rule= rstar+1.5*picx4-0.5*pitarg+ 0.5*xgap2;";                           %AAIT, ACIT (new) -Non-Inertial Taylor
+          end
+       end
+end
+
+if mprule == "short"
+    if inertial == 1
+        a="rule=.85*rff(-1)+.15*rstar+.225*picx4-0.075*pitarg ;";                %Shortfalls rule  - Inertial Balanced Approach & Taylor
+    else
+        a="rule=rstar+1.5*picx4-0.5*pitarg;";                                   %Shortfalls rule - Non-Inertial Balanced Approach & Taylor
+    end
 end
 
 if mprule == "fpt"
@@ -142,25 +145,12 @@ end
 
 if mprule == "ait" | mprule == "aait"
     a = modtext(varline);
-    if aait_mod == 4
-        a = a + " pic16";
-    else
-        a = a + " pic32";
-    end
+    a = a + " pic32";
     modtext(varline) = a;
     loc = find(modtext=="end;");
-    
-    if aait_mod ==4
-        modtext(loc) = "[name='pic16']";
-    else
-        modtext(loc) = "[name='pic32']";
-    end
+    modtext(loc) = "[name='pic32']";
     loc = loc + 1;
-    if aait_mod ==4
-        a="pic16 = 25*pcnia_l - 25*pcnia_l(-16);";
-    else
-        a="pic32 = 12.5*pcnia_l - 12.5*pcnia_l(-32);";
-    end
+    a="pic32 = 12.5*pcnia_l - 12.5*pcnia_l(-32);";
     modtext(loc) = a;
     loc = loc + 1;
     modtext(loc) = "end;";
