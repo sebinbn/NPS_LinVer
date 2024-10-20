@@ -80,35 +80,24 @@ while vflag == 1
             asymterm_last = asymterm;
         end
         
-       if inertial == 1 
-            if mprule == "aait"
-                materm_mat(counter,:) = (1.2*pic32_pred - 0.075*picx4_pred).*asymtest;                   % for default AAIT
-            elseif mprule == "atit"
-                materm_mat(counter,:) = (- 0.075 * (atit_tgt -2) ).*asymtest;                                         %2 is the new pitarg
-            elseif mprule == "acit"
-                materm_mat(counter,:) = ((acit_coef - 0.5) * 0.15 *picx4_pred).*asymtest;                   % for Inertial ACIT
-            elseif mprule == "short"
-                if rulevers == 'BA'
-                    materm_mat(counter,:) = (0.15*xgap2_pred).*asymtest;                    %Inertial Shortfalls with Balanced Approach
-                else
-                    materm_mat(counter,:) = (0.075*xgap2_pred).*asymtest;                   %Inertial Shortfalls with Taylor
-                end
-            end
-        elseif inertial == 0 
-            if mprule == "aait"
-                materm_mat(counter,:) = (8*pic32_pred - 0.5*picx4_pred).*asymtest;           % for Non-inertial AAIT
-            elseif mprule == "atit"
-                materm_mat(counter,:) = (- 0.5 * (atit_tgt -2)).*asymtest;                              %2 is the new pitarg
-            elseif mprule == "acit"
-                materm_mat(counter,:) = ((acit_coef - 0.5)*picx4_pred).*asymtest;                    % for Non-inertial ACIT
-            elseif mprule == "short"
-                if rulevers == 'BA'
-                    materm_mat(counter,:) = (xgap2_pred).*asymtest;                         %Non-inertial Shortfalls with Balanced Approach
-                else
-                    materm_mat(counter,:) = (0.5*xgap2_pred).*asymtest;                     %Non-inertial Shortfalls with Taylor
-                end
+        if mprule == "aait"
+            materm_mat(counter,:) = (8*pic32_pred - 0.5*picx4_pred).*asymtest;           % for Non-inertial AAIT
+        elseif mprule == "atit"
+            materm_mat(counter,:) = (- 0.5 * (atit_tgt -2)).*asymtest;                              %2 is the new pitarg
+        elseif mprule == "acit"
+            materm_mat(counter,:) = ((acit_coef - 0.5)*picx4_pred).*asymtest;                    % for Non-inertial ACIT
+        elseif mprule == "short"
+            if rulevers == 'BA'
+                materm_mat(counter,:) = (xgap2_pred).*asymtest;                         %Non-inertial Shortfalls with Balanced Approach
+            else
+                materm_mat(counter,:) = (0.5*xgap2_pred).*asymtest;                     %Non-inertial Shortfalls with Taylor
             end
         end
+
+       if inertial == 1 
+             materm_mat(counter,:) = 0.15 * materm_mat(counter,:);          
+       end
+       
         z = asymtest*0;
         ww = [1:counter].^decay;
         ww = ww/sum(ww);

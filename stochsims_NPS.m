@@ -42,7 +42,9 @@ acit_coefs = [0.75,1.5]; %asymmetric coefficient for ACIT
   %["intay","short","aait","acit","atit","ait"]
 for expvers = "mcapwp" %["var","mceall","mcapwp","mcap"];
 for rulevers = ["T","BA"]
-for rep = 1:6
+mprule = "aait";
+
+    for rep = 1:6
     if rep > 4
         mprule = "acit";
         acit_coef = acit_coefs(rep-4);
