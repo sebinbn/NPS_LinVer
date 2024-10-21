@@ -64,8 +64,8 @@ while vflag == 1
         else    
             picx4_pred = ar_picx4*yc;
             if mprule == "aait"
-                pic32_pred = ar_pic32*yc;
-                asymtest = .5+.5*tanh(-25*(pic32_pred+.1));
+                pic_qtrs_pred = ar_pic_qtrs*yc;
+                asymtest = .5+.5*tanh(-25*(pic_qtrs_pred+.1));
             elseif ismember(mprule, ["acit","atit"])
                 asymtest = .5+.5*tanh(-25*(picx4_pred+.1));
             end
@@ -81,7 +81,7 @@ while vflag == 1
         end
         
         if mprule == "aait"
-            materm_mat(counter,:) = (8*pic32_pred - 0.5*picx4_pred).*asymtest;           % for Non-inertial AAIT
+            materm_mat(counter,:) = (aait_qtr/4 *pic_qtrs_pred - 0.5*picx4_pred).*asymtest;           % for Non-inertial AAIT
         elseif mprule == "atit"
             materm_mat(counter,:) = (- 0.5 * (atit_tgt -2)).*asymtest;                              %2 is the new pitarg
         elseif mprule == "acit"
@@ -97,7 +97,7 @@ while vflag == 1
        if inertial == 1 
              materm_mat(counter,:) = 0.15 * materm_mat(counter,:);          
        end
-       
+
         z = asymtest*0;
         ww = [1:counter].^decay;
         ww = ww/sum(ww);

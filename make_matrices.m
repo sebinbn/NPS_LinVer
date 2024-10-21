@@ -111,7 +111,7 @@ end
 if ismember(mprule, ["aait", "acit","atit"])
     picx4_loc = inv_order_var(endo_names=="picx4");
     if mprule == "aait"
-        pic32_loc = inv_order_var(endo_names=="pic32");
+        pic_qtrs_loc = inv_order_var(endo_names=="pic_qtrs");
     end
 end
 if pithresh_imposed == "yes"
@@ -138,8 +138,8 @@ if ismember(mprule, ["aait", "acit","atit"])
     ar_picx4 = zeros(predqtrs,nyv);
     ar_picx4(1,picx4_loc) = 1;
     if mprule == "aait"
-        ar_pic32 = zeros(predqtrs,nyv);
-        ar_pic32(1,pic32_loc) = 1;
+        ar_pic_qtrs = zeros(predqtrs,nyv);
+        ar_pic_qtrs(1,pic_qtrs_loc) = 1;
     end
     
 end
@@ -162,7 +162,7 @@ for i = 2:predqtrs
     if ismember(mprule, ["aait", "acit","atit"])
         ar_picx4(i,:) = aamat(picx4_loc,:);
         if mprule == "aait"
-            ar_pic32(i,:) = aamat(pic32_loc,:);
+            ar_pic_qtrs(i,:) = aamat(pic_qtrs_loc,:);
         end
      end
     if pithresh_imposed == "yes"

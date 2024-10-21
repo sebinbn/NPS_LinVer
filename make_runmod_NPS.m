@@ -145,12 +145,15 @@ end
 
 if mprule == "ait" | mprule == "aait"
     a = modtext(varline);
-    a = a + " pic32";
+    a = a + " pic_qtrs";
     modtext(varline) = a;
     loc = find(modtext=="end;");
-    modtext(loc) = "[name='pic32']";
+    modtext(loc) = "[name='pic_qtrs']";
     loc = loc + 1;
-    a="pic32 = 12.5*pcnia_l - 12.5*pcnia_l(-32);";
+    %coefficient on pcnia_l is 100/yrs of avg = 400/qtrs of avg
+    a="pic_qtrs = " + 400/aait_qtr +"*pcnia_l - " + ...
+        400/aait_qtr + "*pcnia_l(-" + aait_qtr + ");";
+    %a="pic32 = 12.5*pcnia_l - 12.5*pcnia_l(-32);";
     modtext(loc) = a;
     loc = loc + 1;
     modtext(loc) = "end;";
