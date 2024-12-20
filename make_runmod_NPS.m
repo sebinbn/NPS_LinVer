@@ -43,16 +43,18 @@ end
 if ismember(mprule, ["intay", "adur","aait", "acit","atit"])
       if inertial == 1
           if rulevers == 'BA'
-              a="rule=.85*rff(-1)+.15*rstar+.225*picx4-0.075*pitarg +.15*xgap2;";      %Trad,AAIT ACIT (new) - Inertial Balanced Approach
+              a="rule=.85*rff(-1)+.15*rstar+%0.4f*picx4-%0.4f*pitarg +.15*xgap2;";      %Trad,AAIT ACIT (new) - Inertial Balanced Approach
           else 
-              a="rule=.85*rff(-1)+.15*rstar+.225*picx4-0.075*pitarg+.075*xgap2;";      %Trad,AAIT ACIT (new) - Inertial Taylor 
+              a="rule=.85*rff(-1)+.15*rstar+%0.4f*picx4-%0.4f*pitarg+.075*xgap2;";      %Trad,AAIT ACIT (new) - Inertial Taylor 
           end 
+          a = sprintf(a,0.15*(1+hcit_coef),0.15*hcit_coef );
       elseif inertial == 0  
           if rulevers == 'BA'
-              a="rule= rstar+1.5*picx4-0.5*pitarg+ xgap2;";                           %AAIT, ACIT (new) -Non-Inertial Balanced Approach
+              a="rule= rstar+%0.2f*picx4-%0.2f*pitarg+ xgap2;";
           else
-              a="rule= rstar+1.5*picx4-0.5*pitarg+ 0.5*xgap2;";                           %AAIT, ACIT (new) -Non-Inertial Taylor
+              a="rule= rstar+%0.2f*picx4-%0.2f*pitarg+ 0.5*xgap2;";                           %AAIT, ACIT (new) -Non-Inertial Taylor
           end
+          a = sprintf(a,1+hcit_coef,hcit_coef);
        end
 end
 
