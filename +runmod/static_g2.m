@@ -18,6 +18,6 @@ function g2 = static_g2(T, y, x, params, T_flag)
 if T_flag
     T = runmod.static_g2_tt(T, y, x, params);
 end
-g2 = sparse([],[],[],490,240100);
+g2 = sparse([],[],[],485,235225);
 
 end

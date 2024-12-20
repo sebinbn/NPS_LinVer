@@ -1,10 +1,10 @@
-Starting Dynare (version 5.2).
+Starting Dynare (version 5.4).
 Calling Dynare with arguments: noclearall nostrict
 Starting preprocessing of the model file ...
 Substitution of endo leads >= 2: added 7 auxiliary variables and equations.
-Substitution of endo lags >= 2: added 128 auxiliary variables and equations.
+Substitution of endo lags >= 2: added 124 auxiliary variables and equations.
 Substitution of exo lags: added 18 auxiliary variables and equations.
-Found 490 equation(s).
+Found 485 equation(s).
 Evaluating expressions...done
 Computing static model derivatives (order 1).
 Computing dynamic model derivatives (order 1).
