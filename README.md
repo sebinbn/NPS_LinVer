@@ -10,7 +10,7 @@ The original LINVER code has been made public by the Fed. The code here is the o
    3. Asymmetric Target Inflation Targeting
 2. Added following new loss functions
    1. Loss functions with changes in FFR
-   2. Loss fucntion using unemployment gap instead of output gaps
+   2. Loss function using unemployment gap instead of output gaps
    3. Asymmetric loss functions
       1. with asymmetry on output gap (penalise negative output gaps only)
       2. with asymmetry on unemployment gap (penalise positive unemployment gaps only)
